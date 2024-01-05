@@ -4,7 +4,7 @@ image: hschne/anonymous-location
 servers:
   web:
     hosts:
-      - 165.232.77.44
+      - 159.69.216.175
     labels:
       traefik.http.routers.anonymouslocation_secure.rule: Host(`anonymouslocation.com`)
       traefik.http.routers.anonymouslocation_secure.entrypoints: websecure
