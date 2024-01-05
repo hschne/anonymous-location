@@ -23,10 +23,8 @@ jobs:
           bundler-cache: true
       - name: Set up database
         run: bin/rails db:setup
-      - name: Precompile assets
-        run: bundle exec rake assets:precompile
-      - name: Run tests
-        run: bundle exec rspec
+      - name: Run Tests
+        run: bin/rails test:all
 
   lint:
     runs-on: ubuntu-latest
