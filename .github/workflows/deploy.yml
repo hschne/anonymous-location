@@ -18,17 +18,10 @@ jobs:
     env:
       DOCKER_BUILDKIT: 1
       RAILS_ENV: production
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
 
       - name: Set up Docker Buildx
         id: buildx
@@ -68,3 +61,6 @@ jobs:
 
       - name: Deploy command
         run: bundle exec kamal deploy --skip-push
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
