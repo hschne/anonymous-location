@@ -31,8 +31,7 @@ export default class extends Controller {
   onLocationError(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     // Hack, properly remove map
-    document.querySelector("#map").innerHTML =
-      `ERROR(${err.code}): ${err.message}`;
+    // document.querySelector("#map").innerHTML = `ERROR(${err.code}): ${err.message}`;
   }
 
   disconnect() {
