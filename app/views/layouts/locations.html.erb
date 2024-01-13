@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render "layouts/head" %>
+
+    <script
+      src="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.umd.js"
+    ></script>
+    <link
+      href="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.css"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.maptiler.com/maptiler-geocoding-control/v1.2.0/maptilersdk.umd.js"
+    ></script>
+    <link
+      href="https://cdn.maptiler.com/maptiler-geocoding-control/v1.2.0/style.css"
+      rel="stylesheet"
+    >
+  </head>
+
+  <body class="h-screen flex flex-col text-gray-800 bg-blue-100">
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
+  </body>
+</html>

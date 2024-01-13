@@ -8,7 +8,16 @@ export default class extends Controller {
       container: this.element,
       style: maptilersdk.MapStyle.BASIC,
       geolocate: maptilersdk.GeolocationType.POINT,
+      navigationControl: false,
     });
+    map.touchPitch.disable();
+
+    const nav = new maptilersdk.MaptilerNavigationControl({
+      showCompass: false,
+      visualizePitch: false,
+      showZoom: false,
+    });
+    map.addControl(nav, "top-right");
 
     const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({
       limit: 5,
@@ -35,14 +44,17 @@ export default class extends Controller {
         filter: ["==", "$type", "Point"],
       });
     });
+
+    const markers = [];
     map.on("click", async (e) => {
+      markers.forEach((marker) => marker.remove());
       const map = e.target;
       const marker = new maptilersdk.Marker({
         color: "#FFFFFF",
         draggable: true,
-      })
-        .setLngLat(e.lngLat)
-        .addTo(map);
+      }).setLngLat(e.lngLat);
+      markers.push(marker);
+      marker.addTo(map);
     });
   }
 
