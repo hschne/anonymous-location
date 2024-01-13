@@ -1,6 +1,26 @@
-<div id="map" data-controller="map" class="absolute w-full h-screen"></div>
+<section data-controller="new-map" class="w-full h-screen relative">
+  <div data-new-map-target="map" class="absolute w-full h-screen"></div>
 
-<div id="results">
-  <ul id="search-results">
-  </ul>
-</div>
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50">
+    <%= form_with(model: @location, class: "flex gap-5 bg-gray-100 rounded shadow p-4") do |form| %>
+      <div class="flex flex-col">
+        <%= form.label :name %>
+        <%= form.text_field :name,
+                        class:
+                          "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :expiry %>
+        <%= form.number_field :expiry,
+                          class:
+                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <%= form.hidden_field :location, data: { "new-map-target" => "locationInput" } %>
+
+      <%= form.submit class:
+                    "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
+    <% end %>
+  </div>
+</section>
