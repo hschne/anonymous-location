@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["map", "locationInput"];
+  static targets = ["locationInput"];
 
   connect() {
     maptilersdk.config.apiKey = "CV0ZSLFSeTgHr5Pq8Y6U";
@@ -13,7 +13,6 @@ export default class extends Controller {
       geolocateControl: false,
       navigationControl: false,
     });
-    map.touchPitch.disable();
 
     // const nav = new maptilersdk.MaptilerNavigationControl({
     //   showCompass: false,
