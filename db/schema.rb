@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_10_142347) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_17_105656) do
+  create_table "clients", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "color", null: false
+    t.string "coordinates", null: false
+    t.integer "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_clients_on_location_id"
+  end
+
   create_table "dice_words", force: :cascade do |t|
     t.string "words"
     t.datetime "created_at", null: false
@@ -29,4 +40,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_142347) do
     t.index ["key"], name: "index_locations_on_key", unique: true
   end
 
+  add_foreign_key "clients", "locations"
 end

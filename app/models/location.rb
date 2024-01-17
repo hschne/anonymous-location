@@ -22,6 +22,8 @@ class Location < ApplicationRecord
     record.key = Location.generate_key unless record.key.present?
   end
 
+  has_many :clients, dependent: :destroy
+
   validates :key, presence: true
   validates :expiry, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 180 }
   validates :expires_at, presence: true

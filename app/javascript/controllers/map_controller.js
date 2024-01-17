@@ -4,8 +4,8 @@ import consumer from "../channels/consumer";
 export default class extends Controller {
   static values = {
     key: String,
-    client: String,
     location: String,
+    uuid: String,
   };
 
   connect() {
@@ -60,20 +60,14 @@ export default class extends Controller {
       navigationControl: false,
     });
     this.addLocationMarker();
+  }
 
+  loadMapData() {
     const options = {
       enableHighAccuracy: false,
       timeout: 5000,
       maximumAge: 0,
     };
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.sendPosition(position);
-        this.addClientMarker(position);
-      },
-      (err) => this.error(err),
-      options,
-    );
   }
 
   addLocationMarker() {
@@ -94,10 +88,21 @@ export default class extends Controller {
     marker.addTo(this.map);
   }
 
+  addMyLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.sendPosition(position);
+        this.addClientMarker(position);
+      },
+      (err) => this.error(err),
+      options,
+    );
+  }
+
   sendPosition(pos) {
     this.subscription.send({
-      client: this.clientValue,
       location: pos.coords,
+      uuid: this.uuidValue,
     });
   }
 
