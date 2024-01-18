@@ -7,7 +7,7 @@
   class="w-full h-screen relative"
 >
   <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50">
-    <%= form_with(model: @client, class: "flex gap-5 bg-gray-100 rounded shadow p-4") do |form| %>
+    <%= form_with(model: @client, url: [@location, @client], class: "flex flex-row gap-5 bg-gray-100 rounded shadow p-4") do |form| %>
       <div class="flex flex-col">
         <%= form.label :name %>
         <%= form.text_field :name,
@@ -17,21 +17,19 @@
 
       <div class="flex flex-col">
         <%= form.label :color %>
-        <%= form.number_field :expiry,
-                          class:
-                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.text_field :color,
+                        class:
+                          "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
-      <%= form.hidden_field :uuid, :uuid %>
+      <%= form.hidden_field :uuid %>
+      <%= form.hidden_field :coordinates %>
 
-      <%= form.submit class:
+      <%= form.submit "Share Location",
+                  class:
                     "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
     <% end %>
   </div>
-  <button
-    class="absolute z-50 bottom-4 left-1/2 rounded shadow bg-gray-200 p-2"
-    data-action="click->map#addMyLocation"
-  >Share Location</button>
 </section>
 
 <div class="mx-auto md:w-2/3 w-full flex">

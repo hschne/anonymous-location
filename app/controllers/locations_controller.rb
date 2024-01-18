@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
 
   def show
-    session[:uuid] ||= SecureRandom.uuid
+    @client = Client.new(uuid: session[:uuid])
   end
 
   def new
@@ -49,7 +49,6 @@ class LocationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_location
     @location = Location.find_by!(key: params[:id])
   end

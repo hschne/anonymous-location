@@ -2,7 +2,7 @@
 
 class LocationChannel < ApplicationCable::Channel
   def subscribed
-    stream_from(channel_name)
+    stream_for(location)
   end
 
   # Data is a hash with the following keys:
@@ -14,11 +14,11 @@ class LocationChannel < ApplicationCable::Channel
     data.except!('action')
     location.clients.create!(**data)
     location.increment(:client_count)
-    ActionCable.server.broadcast(channel_name, { event: 'clientConnected', **data })
+    broadcast_to(location, { event: 'clientConnected', **data })
   end
 
   def receive(data)
-    ActionCable.server.broadcast(channel_name, { event: 'clientMoved', uuid:, coordinates: data['coordinates'] })
+    broadcast_to(location, { event: 'clientMoved', uuid:, coordinates: data['coordinates'] })
   end
 
   def unsubscribed
@@ -27,7 +27,7 @@ class LocationChannel < ApplicationCable::Channel
       client.destroy
       location.decrement(:client_count)
     end
-    ActionCable.server.broadcast(channel_name, { event: 'clientDisconnected', uuid: })
+    broadcast_to(location, { event: 'clientDisconnected', uuid: })
   end
 
   private
