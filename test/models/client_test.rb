@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clients
@@ -19,7 +21,7 @@
 #
 #  location_id  (location_id => locations.id)
 #
-require "test_helper"
+require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
   # test "the truth" do

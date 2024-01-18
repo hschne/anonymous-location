@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clients
@@ -21,9 +23,9 @@
 #
 FactoryBot.define do
   factory :client do
-    name { "MyString" }
-    color { "MyString" }
-    coordinates { "MyString" }
+    name { 'MyString' }
+    color { 'MyString' }
+    coordinates { 'MyString' }
     location { nil }
   end
 end

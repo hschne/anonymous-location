@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: locations
@@ -16,7 +18,7 @@
 #
 #  index_locations_on_key  (key) UNIQUE
 #
-require "test_helper"
+require 'test_helper'
 
 class LocationTest < ActiveSupport::TestCase
   # test "the truth" do

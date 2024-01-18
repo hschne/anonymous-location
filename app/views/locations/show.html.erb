@@ -2,10 +2,36 @@
   data-controller="map"
   data-map-key-value="<%= @location.key %>"
   data-map-location-value="<%= @location.location %>"
-  data-map-uuid-value="<%= SecureRandom.uuid %>"
-  class="w-full h-screen"
+  data-map-uuid-value="<%=  session[:uuid] %>"
+  data-map-clients-value="<%= @location.clients.map(&:to_json) %>"
+  class="w-full h-screen relative"
 >
-  <div>SDUD</div>
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50">
+    <%= form_with(model: @client, class: "flex gap-5 bg-gray-100 rounded shadow p-4") do |form| %>
+      <div class="flex flex-col">
+        <%= form.label :name %>
+        <%= form.text_field :name,
+                        class:
+                          "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :color %>
+        <%= form.number_field :expiry,
+                          class:
+                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <%= form.hidden_field :uuid, :uuid %>
+
+      <%= form.submit class:
+                    "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
+    <% end %>
+  </div>
+  <button
+    class="absolute z-50 bottom-4 left-1/2 rounded shadow bg-gray-200 p-2"
+    data-action="click->map#addMyLocation"
+  >Share Location</button>
 </section>
 
 <div class="mx-auto md:w-2/3 w-full flex">

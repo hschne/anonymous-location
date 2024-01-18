@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: locations
@@ -18,8 +20,8 @@
 #
 class Location < ApplicationRecord
   before_validation do |record|
-    record.expires_at = record.expiry.minutes.from_now unless record.expires_at.present?
-    record.key = Location.generate_key unless record.key.present?
+    record.expires_at = record.expiry.minutes.from_now if record.expires_at.blank?
+    record.key = Location.generate_key if record.key.blank?
   end
 
   has_many :clients, dependent: :destroy
@@ -43,6 +45,6 @@ class Location < ApplicationRecord
       .find(*ids)
       .map(&:words)
       .map(&:split)
-      .map { |t| t[rand(0..t.length - 1)] }.flatten.join("-")
+      .map { |t| t[rand(0..t.length - 1)] }.flatten.join('-')
   end
 end

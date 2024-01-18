@@ -1,30 +1,42 @@
+# frozen_string_literal: true
+
 class LocationChannel < ApplicationCable::Channel
   def subscribed
-    location = Location.find_by!(key: params[:key])
-    ActionCable.server.broadcast(location, { event: "clientConnected", client: client, client_count: location.client_count })
-    stream_for(location)
+    stream_from(channel_name)
   end
 
-  def addClient(data)
+  # Data is a hash with the following keys:
+  #  - uuid
+  #  - name
+  #  - coordinates
+  #  - color
+  def appear(data)
+    data.except!('action')
+    location.clients.create!(**data)
+    location.increment(:client_count)
+    ActionCable.server.broadcast(channel_name, { event: 'clientConnected', **data })
   end
 
   def receive(data)
-    ActionCable.server.broadcast(location, data)
+    ActionCable.server.broadcast(channel_name, { event: 'clientMoved', uuid:, coordinates: data['coordinates'] })
   end
 
   def unsubscribed
-    client.destroy()
-    location.decrement!(:client_count)
-    ActionCable.server.broadcast(location, { event: "clientDisconnected", client: client, client_count: location.client_count })
+    client = location.clients.find_by(uuid:)
+    if client
+      client.destroy
+      location.decrement(:client_count)
+    end
+    ActionCable.server.broadcast(channel_name, { event: 'clientDisconnected', uuid: })
   end
 
   private
 
-  def location
-    @location ||= Location.find_by!(key: params[:key])
+  def channel_name
+    "location_#{location.key}"
   end
 
-  def client
-    @client ||= location.clients.find_by!(uuid: params[:uuid])
+  def location
+    @location ||= Location.find_by!(key: params[:key])
   end
 end
