@@ -9,7 +9,7 @@ const LOCATION_OPTIONS = {
 
 const MAP_OPTIONS = {
   zoom: 15,
-  style: maptilersdk.MapStyle.BASIC,
+  style: "740f0993-613e-4b3c-9781-4bd6820bd081",
   geolocateControl: false,
   navigationControl: false,
 };
@@ -98,7 +98,7 @@ export default class extends Controller {
 
   addClientMarkers() {
     this.clientsValue.forEach((client) => {
-      const { uuid, color, coordinates } = JSON.parse(client);
+      const { uuid, color, coordinates } = client;
       this.addClientMarker({ uuid, color, coordinates });
     });
   }

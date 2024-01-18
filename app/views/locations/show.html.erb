@@ -3,7 +3,7 @@
   data-map-key-value="<%= @location.key %>"
   data-map-location-value="<%= @location.location %>"
   data-map-uuid-value="<%=  session[:uuid] %>"
-  data-map-clients-value="<%= @location.clients.map(&:to_json) %>"
+  data-map-clients-value="<%= @location.clients.to_json %>"
   class="w-full h-screen relative"
 >
   <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50">
