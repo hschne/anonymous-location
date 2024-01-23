@@ -39,3 +39,37 @@
     opacity: 0;
   }
 }
+
+/* :root { */
+/*   --radio-border-color: #8b8c89; */
+/*   --radio-checked-color: #274c77; */
+/*   --radio-hover-color: #a3cef1; */
+/*   --radio-disabled-bg-color: #d9d9d9; */
+/* } */
+/**/
+/* input[type="radio"] { */
+/*   box-sizing: border-box; */
+/*   width: 20px; */
+/*   height: 20px; */
+/*   margin: 6px; */
+/*   padding: 0; */
+/*   border: 2px solid var(--radio-border-color); */
+/*   border-radius: 50%; */
+/*   appearance: none; */
+/*   background-color: green; */
+/*   outline: none; */
+/* } */
+/**/
+/* input[type="radio"]:not(:disabled):checked { */
+/*   border-color: var(--radio-checked-color); */
+/*   background-color: var(--radio-checked-color); */
+/*   background-clip: content-box; */
+/*   padding: 2px; */
+/*   background-image: radial-gradient( */
+/*     circle, */
+/*     var(--radio-checked-color) 0%, */
+/*     var(--radio-checked-color) 50%, */
+/*     transparent 60%, */
+/*     transparent 100% */
+/*   ); */
+/* } */

@@ -83,6 +83,16 @@
                               "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
           </div>
 
+          <% Client::COLORS.each do |(name,color)| %>
+            <div class="flex flex-col">
+              <%= form.radio_button :color,
+                                color,
+                                id: color,
+                                class: "appearance-none bg-#{name}-500 h-10 w-10" %>
+              <%= form.label name, class: "text-#{color} text-center" %>
+            </div>
+          <% end %>
+
           <%= form.hidden_field :uuid %>
           <%= form.hidden_field :coordinates %>
 
