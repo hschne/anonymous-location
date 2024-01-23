@@ -15,6 +15,8 @@ class LocationChannel < ApplicationCable::Channel
     location.clients.create!(**data)
     location.increment(:client_count)
     broadcast_to(location, { event: 'clientConnected', **data })
+    Turbo::StreamsChannel.broadcast_prepend_to('flash', partial: 'layouts/flash',
+                                                        locals: { flash: { notice: 'JOINED' } }, target: 'quotes')
   end
 
   def receive(data)

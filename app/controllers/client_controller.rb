@@ -5,7 +5,7 @@ class ClientController < ApplicationController
     respond_to do |format|
       if @client.save
         LocationChannel.broadcast_to(location, { event: 'clientConnected', **client_params })
-        format.html { redirect_to location_url(@location), notice: 'Client was successfully created.' }
+        head(:ok)
       else
         format.html { render :new, status: :unprocessable_entity }
       end

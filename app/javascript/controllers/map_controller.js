@@ -69,11 +69,17 @@ export default class extends Controller {
     console.log(data);
     const { uuid, coordinates } = data;
     if (data.event === "clientDisconnected") {
+      if (!this.markers[uuid]) return;
+
       this.markers[uuid].remove();
       delete this.markers[uuid];
     } else if (data.event == "clientConnected") {
+      if (this.markers[uuid]) return;
+
       this.addClientMarker(data);
     } else {
+      if (!this.markers[uuid]) return;
+
       this.markers[uuid].setLngLat(coordinates.split(","));
     }
   }
@@ -117,32 +123,28 @@ export default class extends Controller {
     this.markers[uuid] = marker;
   }
 
-  addMyLocation() {
+  shareLocation(e) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.sendPosition(position);
+        const form = e.target;
+        form.disabled = true;
+        form.classList.toggle("hidden");
+        this.sendPosition(position, e.target);
       },
       (err) => this.error(err),
       LOCATION_OPTIONS,
     );
+    e.preventDefault();
   }
 
-  sendPosition(pos) {
+  sendPosition(pos, form) {
     const { latitude, longitude } = pos.coords;
+    const name = form.querySelector("#client_name").value;
+    const color = form.querySelector("#client_color").value;
     this.subscription.perform("appear", {
       uuid: this.uuidValue,
-      name: "CODENAME",
-      color: "#0000ff",
-      coordinates: `${longitude},${latitude}`,
-    });
-  }
-
-  positionsChanged(pos) {
-    const { latitude, longitude } = pos.coords;
-    this.subscription.perform("changed", {
-      uuid: this.uuidValue,
-      name: "CODENAME",
-      color: "#0000ff",
+      name: name,
+      color: color,
       coordinates: `${longitude},${latitude}`,
     });
   }

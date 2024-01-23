@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[show update destroy]
+  before_action :set_location, only: %i[show destroy]
 
   def show
+    session[:uuid] ||= SecureRandom.uuid
     @client = Client.new(uuid: session[:uuid])
   end
 
@@ -14,27 +15,11 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
 
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to location_url(@location), notice: 'Location was successfully created.' }
-        format.json { render :show, status: :created, location: @location }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /locations/1 or /locations/1.json
-  def update
-    respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to location_url(@location), notice: 'Location was successfully updated.' }
-        format.json { render :show, status: :ok, location: @location }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.save
+      redirect_to location_url(@location), notice: "Location #{@location.name} was successfully created."
+    else
+      flash.now[:alert] = @location.errors.full_messages.join(', ')
+      render :new, status: :unprocessable_entity
     end
   end
 

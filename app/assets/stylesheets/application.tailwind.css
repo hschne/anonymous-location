@@ -12,32 +12,30 @@
 
 */
 
-#results {
-  position: absolute;
-  top: 20;
-  left: 20;
-  width: 30%;
-  overflow: auto;
-  background: rgba(255, 255, 255, 0.8);
-}
-#results ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#results ul li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid gray;
-}
-#results ul li:hover {
-  color: gray;
-}
-#results ul li:last-child {
-  border-bottom-width: 0;
+.flash-message {
+  animation: appear-then-fade 5s both;
 }
 
-.mapboxgl-ctrl-geocoder {
-  background: blue;
-  font-size: 22px;
+@keyframes appear-then-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  60% {
+    opacity: 1;
+  }
+}
+
+.animate-reminder-complete {
+  animation: fade-out 0.3s linear;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
