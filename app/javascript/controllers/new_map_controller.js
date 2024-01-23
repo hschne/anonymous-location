@@ -8,30 +8,19 @@ const MAP_OPTIONS = {
 };
 
 export default class extends Controller {
-  static targets = ["locationInput"];
+  static targets = ["form"];
 
   connect() {
     maptilersdk.config.apiKey = "CV0ZSLFSeTgHr5Pq8Y6U";
-
     const map = new maptilersdk.Map({
       ...MAP_OPTIONS,
       container: this.element,
-      geolocate: maptilersdk.GeolocationType.POINT,
+      geolocate: maptilersdk.GeolocationType.COUNTRY,
     });
 
-    // const nav = new maptilersdk.MaptilerNavigationControl({
-    //   showCompass: false,
-    //   visualizePitch: false,
-    //   showZoom: false,
-    // });
-    // map.addControl(nav, "top-right");
-    //
-    // const gc = new maptilersdkMaptilerGeocoder.GeocodingControl({
-    //   limit: 5,
-    // });
-    // map.addControl(gc, "top-left");
-
     const markers = [];
+    const locationField = this.formTarget.querySelector("#location_location");
+    const submitButtom = this.formTarget.querySelector("#new_map_submit");
     map.on("click", async (e) => {
       markers.forEach((marker) => marker.remove());
       const map = e.target;
@@ -39,9 +28,15 @@ export default class extends Controller {
         color: "#000",
         draggable: true,
       }).setLngLat(e.lngLat);
+      marker.on("dragend", (e) => {
+        locationField.value = `${e.target._lngLat.lng},${e.target._lngLat.lat}`;
+      });
       markers.push(marker);
       marker.addTo(map);
-      this.locationInputTarget.value = `${e.lngLat.lng},${e.lngLat.lat}`;
+      locationField.value = `${e.lngLat.lng},${e.lngLat.lat}`;
+      if (locationField.value != "") {
+        submitButtom.disabled = false;
+      }
     });
   }
 }

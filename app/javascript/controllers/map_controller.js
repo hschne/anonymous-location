@@ -79,7 +79,7 @@ export default class extends Controller {
 
   addLocationMarker() {
     const marker = new maptilersdk.Marker({
-      color: "#fff",
+      color: "#000",
       draggable: false,
     }).setLngLat(this.locationValue.split(","));
     marker.addTo(this.map);

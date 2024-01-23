@@ -22,6 +22,17 @@
 #  location_id  (location_id => locations.id)
 #
 class Client < ApplicationRecord
+  COLORS = {
+    blue: '#1d4ed8',
+    red: '#b91c1c',
+    green: '#15803d',
+    amber: '#b45309',
+    purple: '#7e22ce'
+  }.freeze
+
+  before_validation do |record|
+    record.name = Client::COLORS.invert[record.color].to_s.capitalize if record.name.blank?
+  end
   belongs_to :location, optional: true
 
   validates :name, :color, :uuid, :coordinates, presence: true

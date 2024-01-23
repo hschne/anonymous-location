@@ -8,62 +8,89 @@
   class="w-full h-screen relative"
 >
   <div
-    id="form"
-    class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50"
+    data-controller="slide"
+    class="
+      absolute bottom-0 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-3
+      bg-gray-100 rounded shadow p-4 w-full md:w-2/3 transition-transform
+    "
   >
-    <% unless @location.clients.find_by(uuid: session[:uuid]) %>
-      <%= form_with(model: @client, url: [@location, @client], 
-                class: "flex flex-row gap-5 bg-gray-100 rounded shadow p-4",
+    <div class="w-full flex flex-row justify-between align-center">
+      <h2 class="text-lg font-bold"><%= @location.name %></h2>
+      <button data-slide-target="button" data-action="click->slide#toggle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-chevron-down"
+        ><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+
+    </div>
+
+    <div data-slide-target="content" class="flex flex-col gap-2">
+      <p class="text-md">
+        Share link to invite others.
+      </p>
+      <code
+        data-controller="clipboard"
+        class="
+          relative w-full text-sm sm:text-base inline-flex text-left items-center
+          bg-gray-800 text-white rounded-lg p-2
+        "
+      >
+
+        <p class="w-full" data-clipboard-target="source">
+          <%= "#{Rails.application.routes.default_url_options[:host]}/locations/#{@location.key}" %>
+        </p>
+        <button
+          data-action="clipboard#copy"
+          class="
+            flex border border-gray-500 rounded text-gray-500 hover:text-white transition
+            py-1 px-2 gap-1 flex-row items-center justify-center self-start
+          "
+        >
+          <svg
+            class="shrink-0 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z"></path>
+            <path
+              d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z"
+            >
+            </path>
+          </svg>
+          <span data-clipboard-target="trigger">Copy</span>
+        </button>
+      </code>
+      <% unless @location.clients.find_by(uuid: session[:uuid]) %>
+        <%= form_with(model: @client, url: [@location, @client], 
+                    id: "form",
+                class: "flex flex-row gap-5 bg-gray-100 w-full",
                 data: { controller: 'form', action: "submit->form#submit"}) do |form| %>
-        <div class="flex flex-col">
-          <%= form.label :name %>
-          <%= form.text_field :name,
-                          class:
-                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-        </div>
+          <div class="flex flex-col">
+            <%= form.label :color, "Select Color" %>
+            <%= form.text_field :color,
+                            class:
+                              "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
 
-        <div class="flex flex-col">
-          <%= form.label :color %>
-          <%= form.text_field :color,
-                          class:
-                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-        </div>
+          <%= form.hidden_field :uuid %>
+          <%= form.hidden_field :coordinates %>
 
-        <%= form.hidden_field :uuid %>
-        <%= form.hidden_field :coordinates %>
-
-        <%= form.submit "Join Location",
-                    class:
-                      "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
+          <%= form.submit "Share Your Position",
+                      class:
+                        "mt-2 inline-block shadow rounded py-2 px-3 bg-white border-gray-500 cursor-pointer md:order-last disabled:opacity-50 disabled:cursor-not-allowed" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </section>
-
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p
-        class="
-          py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block
-        "
-        id="notice"
-      ><%= notice %></p>
-    <% end %>
-
-    <%= render @location %>
-
-    <%= link_to "Edit this location",
-    edit_location_path(@location),
-    class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this location",
-      location_path(@location),
-      method: :delete,
-      class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-    <%= link_to "Back to locations",
-    locations_path,
-    class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
-</div>
