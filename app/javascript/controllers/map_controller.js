@@ -1,12 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import consumer from "../channels/consumer";
 
-const LOCATION_OPTIONS = {
-  enableHighAccuracy: false,
-  timeout: 5000,
-  maximumAge: 0,
-};
-
 const MAP_OPTIONS = {
   zoom: 15,
   style: "740f0993-613e-4b3c-9781-4bd6820bd081",
@@ -34,9 +28,6 @@ export default class extends Controller {
   }
 
   connectToChannel() {
-    console.log("Connecting...");
-    console.log(this.keyValue);
-    console.log(this.uuidValue);
     this.subscription = consumer.subscriptions.create(
       {
         channel: "LocationChannel",
@@ -50,19 +41,11 @@ export default class extends Controller {
     );
   }
 
-  _connected({ reconnected }) {
-    console.log("Connected...");
-    if (reconnected) {
-      console.log("Reconnected...");
-    }
+  _connected() {
     this.initializeMap();
   }
 
-  _disconnected() {
-    console.log("Disconnected...");
-    const event = new CustomEvent("channel-disconnected");
-    window.dispatchEvent(event);
-  }
+  _disconnected() {}
 
   _received(data) {
     console.log("Received...");
@@ -121,35 +104,5 @@ export default class extends Controller {
     }
     marker.addTo(this.map);
     this.markers[uuid] = marker;
-  }
-
-  shareLocation(e) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const form = e.target;
-        form.disabled = true;
-        form.classList.toggle("hidden");
-        this.sendPosition(position, e.target);
-      },
-      (err) => this.error(err),
-      LOCATION_OPTIONS,
-    );
-    e.preventDefault();
-  }
-
-  sendPosition(pos, form) {
-    const { latitude, longitude } = pos.coords;
-    const name = form.querySelector("#client_name").value;
-    const color = form.querySelector("#client_color").value;
-    this.subscription.perform("appear", {
-      uuid: this.uuidValue,
-      name: name,
-      color: color,
-      coordinates: `${longitude},${latitude}`,
-    });
-  }
-
-  error(err) {
-    console.error(`ERROR(${err.code}): ${err.message}`);
   }
 }

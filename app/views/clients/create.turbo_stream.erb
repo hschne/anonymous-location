@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>
+
+<% if @client.persisted? %>
+  <%= turbo_stream.remove "form" %>
+<% end %>

@@ -15,11 +15,14 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
 
-    if @location.save
-      redirect_to location_url(@location), notice: "Location #{@location.name} was successfully created."
-    else
-      flash.now[:alert] = @location.errors.full_messages.join(', ')
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @location.save
+        format.all { redirect_to location_url(@location), notice: "Location #{@location.name} created." }
+      else
+        flash.now[:alert] = @location.errors.full_messages.join(', ')
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream
+      end
     end
   end
 

@@ -1,5 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 
+const MAP_OPTIONS = {
+  zoom: 15,
+  style: "740f0993-613e-4b3c-9781-4bd6820bd081",
+  geolocateControl: false,
+  navigationControl: false,
+};
+
 export default class extends Controller {
   static targets = ["locationInput"];
 
@@ -7,11 +14,9 @@ export default class extends Controller {
     maptilersdk.config.apiKey = "CV0ZSLFSeTgHr5Pq8Y6U";
 
     const map = new maptilersdk.Map({
+      ...MAP_OPTIONS,
       container: this.element,
-      style: maptilersdk.MapStyle.BASIC,
       geolocate: maptilersdk.GeolocationType.POINT,
-      geolocateControl: false,
-      navigationControl: false,
     });
 
     // const nav = new maptilersdk.MaptilerNavigationControl({

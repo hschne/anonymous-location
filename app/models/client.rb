@@ -23,4 +23,6 @@
 #
 class Client < ApplicationRecord
   belongs_to :location, optional: true
+
+  validates :name, :color, :uuid, :coordinates, presence: true
 end

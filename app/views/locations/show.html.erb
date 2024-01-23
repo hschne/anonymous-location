@@ -1,3 +1,4 @@
+<%= turbo_stream_from @location %>
 <section
   data-controller="map"
   data-map-key-value="<%= @location.key %>"
@@ -6,29 +7,35 @@
   data-map-clients-value="<%= @location.clients.to_json %>"
   class="w-full h-screen relative"
 >
-  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50">
-    <%= form_with(model: @client, url: [@location, @client], class: "flex flex-row gap-5 bg-gray-100 rounded shadow p-4", 
-                  data: { action: "submit->map#shareLocation" }) do |form| %>
-      <div class="flex flex-col">
-        <%= form.label :name %>
-        <%= form.text_field :name,
-                        class:
-                          "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-      </div>
+  <div
+    id="form"
+    class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50"
+  >
+    <% unless @location.clients.find_by(uuid: session[:uuid]) %>
+      <%= form_with(model: @client, url: [@location, @client], 
+                class: "flex flex-row gap-5 bg-gray-100 rounded shadow p-4",
+                data: { controller: 'form', action: "submit->form#submit"}) do |form| %>
+        <div class="flex flex-col">
+          <%= form.label :name %>
+          <%= form.text_field :name,
+                          class:
+                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
 
-      <div class="flex flex-col">
-        <%= form.label :color %>
-        <%= form.text_field :color,
-                        class:
-                          "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-      </div>
+        <div class="flex flex-col">
+          <%= form.label :color %>
+          <%= form.text_field :color,
+                          class:
+                            "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
 
-      <%= form.hidden_field :uuid %>
-      <%= form.hidden_field :coordinates %>
+        <%= form.hidden_field :uuid %>
+        <%= form.hidden_field :coordinates %>
 
-      <%= form.submit "Share Location",
-                  class:
-                    "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
+        <%= form.submit "Join Location",
+                    class:
+                      "rounded-lg py-3 px-5 bg-white border-gray-500 inline-block font-medium cursor-pointer self-end" %>
+      <% end %>
     <% end %>
   </div>
 </section>
