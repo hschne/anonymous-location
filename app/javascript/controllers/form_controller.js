@@ -24,8 +24,7 @@ export default class extends Controller {
     );
   }
 
-  onError() {
-    document.querySelector("#flash").innerHtml =
-      "You must enable location sharing, else this won't work!";
+  error(err) {
+    console.log(err);
   }
 }
