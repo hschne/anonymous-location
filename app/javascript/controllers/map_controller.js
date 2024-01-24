@@ -73,6 +73,11 @@ export default class extends Controller {
       container: this.element,
       center: this.locationValue.split(","),
     });
+
+    this.map.on("load", () => {
+      document.querySelector("#spinner").remove();
+    });
+
     this.addLocationMarker();
     this.addClientMarkers();
   }

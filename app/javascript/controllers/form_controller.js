@@ -7,17 +7,29 @@ const LOCATION_OPTIONS = {
 };
 
 export default class extends Controller {
+  static targets = ["spinner"];
   connect() {}
+
+  colorSelected(e) {
+    const form = this.element;
+    const radioButtons = form.querySelectorAll("input[type=radio]:checked");
+    const submit = form.querySelector("#share_position_submit");
+    if (radioButtons.length > 0) {
+      submit.disabled = false;
+    } else {
+      submit.disabled = true;
+    }
+  }
 
   submit(e) {
     e.preventDefault();
+
+    this.spinnerTarget.classList.remove("hidden");
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const form = this.element;
-        form.disabled = true;
-        this.element.querySelector("#client_coordinates").value =
-          `${position.coords.longitude},${position.coords.latitude}`;
-        Turbo.navigator.submitForm(form);
+        this.setCoordinatesAndSubmit(
+          `${position.coords.longitude},${position.coords.latitude}`,
+        );
       },
       (err) => this.error(err),
       LOCATION_OPTIONS,
@@ -25,6 +37,14 @@ export default class extends Controller {
   }
 
   error(err) {
-    console.log(err);
+    this.setCoordinatesAndSubmit("");
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+  setCoordinatesAndSubmit(coordinates) {
+    const form = this.element;
+    form.disabled = true;
+    this.element.querySelector("#client_coordinates").value = coordinates;
+    this.spinnerTarget.classList.add("hidden");
+    Turbo.navigator.submitForm(form);
   }
 }

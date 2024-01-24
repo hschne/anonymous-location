@@ -17,6 +17,9 @@ export default class extends Controller {
       container: this.element,
       geolocate: maptilersdk.GeolocationType.COUNTRY,
     });
+    map.on("load", () => {
+      document.querySelector("#spinner").remove();
+    });
 
     const markers = [];
     const locationField = this.formTarget.querySelector("#location_location");
