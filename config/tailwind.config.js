@@ -20,13 +20,4 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
   ],
-  purge: {
-    safelist: [
-      "bg-amber-500",
-      "bg-purple-500",
-      "bg-green-500",
-      "bg-red-500",
-      "bg-blue-500",
-    ],
-  },
 };
