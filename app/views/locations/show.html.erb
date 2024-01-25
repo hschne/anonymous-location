@@ -1,5 +1,6 @@
 <%= turbo_stream_from @location %>
 <section
+  id="map"
   data-controller="map"
   data-map-key-value="<%= @location.key %>"
   data-map-name-value="<%= @location.name %>"
@@ -102,7 +103,7 @@
         <%= form_with(model: @client, url: [@location, @client], 
                     id: "form",
                 class: "flex flex-col gap-4 bg-gray-100 w-full justify-center items-center py-2",
-                data: { controller: 'form', action: "submit->form#submit"}) do |form| %>
+                  data: { controller: 'form', 'form-map-outlet': "#map", action: "submit->form#submit"}) do |form| %>
           <div class="grid grid-cols-9 gap-0.5 w-full justify-center items-center">
             <p class="col-span-full">Marker Color</p>
             <% Client::COLORS.each do |(name,color)| %>

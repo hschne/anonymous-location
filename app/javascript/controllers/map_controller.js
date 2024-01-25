@@ -42,6 +42,10 @@ export default class extends Controller {
     );
   }
 
+  sendCoordinates(coordinates) {
+    this.subscription.send({ uuid: this.uuidValue, coordinates: coordinates });
+  }
+
   _connected() {
     this.initializeMap();
   }
