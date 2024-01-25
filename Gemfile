@@ -66,6 +66,9 @@ group :development do
 end
 
 gem 'kamal'
+
+gem 'inline_svg', '~> 1.9'
+
 gem 'litestack'
 gem 'lograge'
 gem 'sentry-rails'
@@ -81,5 +84,3 @@ end
 group :development, :test do
   gem 'factory_bot_rails'
 end
-
-gem 'inline_svg', '~> 1.9'

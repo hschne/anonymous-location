@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import consumer from "../channels/consumer";
+import { createConsumer } from "@rails/actioncable";
 
 const MAP_OPTIONS = {
   zoom: 15,
@@ -28,7 +28,7 @@ export default class extends Controller {
   }
 
   connectToChannel() {
-    this.subscription = consumer.subscriptions.create(
+    this.subscription = createConsumer().subscriptions.create(
       {
         channel: "LocationChannel",
         key: this.keyValue,
