@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[show destroy]
+  before_action :set_location, only: %i[show]
 
   def show
     session[:uuid] ||= SecureRandom.uuid
@@ -23,15 +23,6 @@ class LocationsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.turbo_stream
       end
-    end
-  end
-
-  def destroy
-    @location.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to new_location_url, notice: 'Location was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

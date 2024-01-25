@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClientsController < ApplicationController
   before_action :set_location
 
@@ -7,8 +9,13 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         LocationChannel.broadcast_to(@location, { event: 'clientConnected', **client_params })
-        Turbo::StreamsChannel.broadcast_prepend_to(@location, partial: 'layouts/flash',
-                                                              locals: { flash: { notice: "#{@client.name} joined this location" } }, target: 'flash')
+        Turbo::StreamsChannel
+          .broadcast_prepend_to(
+            @location,
+            partial: 'layouts/flash',
+            locals: { flash: { notice: "#{@client.name} joined this location" } },
+            target: 'flash'
+          )
         format.html { redirect_to location_url(@location), notice: 'You joined this location.' }
         format.turbo_stream { flash.now[:notice] = 'You joined this location.' }
       else
