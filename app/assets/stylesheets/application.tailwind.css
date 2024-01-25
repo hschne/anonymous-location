@@ -198,3 +198,15 @@ input[type="radio"]:not(:disabled):checked {
   --radio-hover-color: #f87171;
   --radio-disabled-bg-color: #fee2e2;
 }
+
+.popup {
+  @apply text-white text-sm font-semibold;
+
+  .maplibregl-popup-content {
+    @apply bg-gray-800;
+  }
+
+  .maplibregl-popup-tip {
+    border-top-color: #1f2937 !important;
+  }
+}

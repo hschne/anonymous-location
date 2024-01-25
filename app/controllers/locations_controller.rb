@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.all { redirect_to location_url(@location), notice: "Location #{@location.name} created." }
+        format.all { redirect_to location_url(@location), notice: "Location '#{@location.name}' created." }
       else
         flash.now[:alert] = @location.errors.full_messages.join(', ')
         format.html { render :new, status: :unprocessable_entity }

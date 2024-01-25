@@ -15,6 +15,7 @@ const MARKER_OPTIONS = {
 export default class extends Controller {
   static values = {
     key: String,
+    name: String,
     location: String,
     uuid: String,
     clients: Array,
@@ -83,11 +84,35 @@ export default class extends Controller {
   }
 
   addLocationMarker() {
-    const marker = new maptilersdk.Marker({
-      color: "#000",
-      draggable: false,
-    }).setLngLat(this.locationValue.split(","));
-    marker.addTo(this.map);
+    const markerHeight = 50,
+      markerRadius = 10,
+      linearOffset = 25;
+    const popupOffsets = {
+      top: [0, 0],
+      "top-left": [0, 0],
+      "top-right": [0, 0],
+      bottom: [0, -markerHeight],
+      "bottom-left": [
+        linearOffset,
+        (markerHeight - markerRadius + linearOffset) * -1,
+      ],
+      "bottom-right": [
+        -linearOffset,
+        (markerHeight - markerRadius + linearOffset) * -1,
+      ],
+      left: [markerRadius, (markerHeight - markerRadius) * -1],
+      right: [-markerRadius, (markerHeight - markerRadius) * -1],
+    };
+    new maptilersdk.Popup({
+      offset: popupOffsets,
+      closeButton: false,
+      closeOnClick: false,
+      className: "popup",
+    })
+      .setLngLat(this.locationValue.split(","))
+      .setHTML(this.nameValue)
+      .setMaxWidth("300px")
+      .addTo(this.map);
   }
 
   addClientMarkers() {

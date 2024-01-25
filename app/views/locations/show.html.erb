@@ -2,6 +2,7 @@
 <section
   data-controller="map"
   data-map-key-value="<%= @location.key %>"
+  data-map-name-value="<%= @location.name %>"
   data-map-location-value="<%= @location.location %>"
   data-map-uuid-value="<%=  session[:uuid] %>"
   data-map-clients-value="<%= @location.clients.to_json %>"
