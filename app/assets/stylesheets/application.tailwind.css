@@ -200,7 +200,7 @@ input[type="radio"]:not(:disabled):checked {
 }
 
 .popup {
-  @apply text-white text-sm font-semibold;
+  @apply text-white text-sm font-semibold cursor-pointer select-none;
 
   .maplibregl-popup-content {
     @apply bg-gray-800;
