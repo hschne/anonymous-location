@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :clients, only: %i[create]
   end
 
+  get '/legal', to: 'application#legal'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

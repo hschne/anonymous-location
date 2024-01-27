@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def link_classes
+    'underline font-medium hover:no-underline active:text-gray-500'
+  end
+
   def flash_classes(flash_type)
     case flash_type
     when :notice
