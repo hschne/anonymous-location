@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :locations
   root 'application#home'
 
-  resources :locations, except: %i[index] do
+  resources :locations, only: %i[new show create] do
+    collection do
+      get :expired
+    end
     resources :clients, only: %i[create]
   end
 

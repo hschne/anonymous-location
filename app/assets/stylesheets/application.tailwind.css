@@ -16,6 +16,10 @@
   animation: appear-then-fade 5s both;
 }
 
+.collapsed {
+  transform: translate(-50%, calc(100% - 3.5rem));
+}
+
 @keyframes appear-then-fade {
   0%,
   100% {

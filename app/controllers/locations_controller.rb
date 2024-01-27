@@ -26,6 +26,8 @@ class LocationsController < ApplicationController
     end
   end
 
+  def expired; end
+
   private
 
   def set_location

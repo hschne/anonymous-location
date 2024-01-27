@@ -27,9 +27,13 @@ class Location < ApplicationRecord
   has_many :clients, dependent: :destroy
 
   validates :key, :name, presence: true
-  validates :expiry, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 180 }
+  validates :expiry, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 180 }
   validates :expires_at, presence: true
   validates :location, presence: true
+
+  after_destroy do |record|
+    LocationChannel.broadcast_to(record, { event: 'locationDestroyed' })
+  end
 
   def minutes_left
     ((expires_at - Time.zone.now) / 1.minute).to_i

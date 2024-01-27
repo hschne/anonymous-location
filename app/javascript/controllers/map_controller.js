@@ -56,6 +56,7 @@ export default class extends Controller {
     console.log("Received...");
     console.log(data);
     const { uuid, coordinates } = data;
+    console.log(data.event);
     if (data.event === "clientDisconnected") {
       if (!this.markers[uuid]) return;
 
@@ -63,8 +64,9 @@ export default class extends Controller {
       delete this.markers[uuid];
     } else if (data.event == "clientConnected") {
       if (this.markers[uuid]) return;
-
       this.addClientMarker(data);
+    } else if (data.event == "locationDestroyed") {
+      window.location.replace("/locations/expired");
     } else {
       if (!this.markers[uuid]) return;
 

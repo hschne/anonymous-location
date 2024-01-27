@@ -10,6 +10,6 @@ return if stop
 scheduler = Rufus::Scheduler.singleton
 
 # Run cleanup job every minute
-scheduler.cron '* * * * *' do
+scheduler.every '10s' do
   CleanupJob.perform_later
 end
