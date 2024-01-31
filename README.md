@@ -7,7 +7,7 @@
 ### Share your location, not your identity.
 
 [![CI](https://github.com/hschne/anonymous-location/actions/workflows/ci.yml/badge.svg)](https://github.com/hschne/anonymous-location/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/hschne/anonymous-location)](https://img.shields.io/github/license/hschne/anonymous-location)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hschne/anonymous-location/LICENSE)
 
 </div>
 
