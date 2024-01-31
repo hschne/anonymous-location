@@ -7,6 +7,7 @@
   data-map-location-value="<%= @location.location %>"
   data-map-uuid-value="<%=  session[:uuid] %>"
   data-map-clients-value="<%= @location.clients.to_json %>"
+  data-map-api-key-value="<%= ENV["MAPTILER_KEY"] %>"
   class="w-full h-screen relative"
 >
 

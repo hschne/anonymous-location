@@ -10,8 +10,10 @@ const MAP_OPTIONS = {
 export default class extends Controller {
   static targets = ["form"];
 
+  static values = { apiKey: String };
+
   connect() {
-    maptilersdk.config.apiKey = "CV0ZSLFSeTgHr5Pq8Y6U";
+    maptilersdk.config.apiKey = this.apiKeyValue;
     const map = new maptilersdk.Map({
       ...MAP_OPTIONS,
       container: this.element,

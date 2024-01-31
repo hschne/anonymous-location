@@ -19,10 +19,11 @@ export default class extends Controller {
     location: String,
     uuid: String,
     clients: Array,
+    apiKey: String,
   };
 
   connect() {
-    maptilersdk.config.apiKey = "CV0ZSLFSeTgHr5Pq8Y6U";
+    maptilersdk.config.apiKey = this.apiKeyValue;
 
     this.markers = {};
     this.connectToChannel();
