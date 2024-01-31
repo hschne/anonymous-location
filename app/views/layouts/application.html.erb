@@ -9,14 +9,14 @@
       <div class=" mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 " >
 
         <div class="flex flex-row justify-center items-center gap-2">
-          <%= image_tag "logo.png", class: "size-10" %>
+          <%= inline_svg "logo.svg", class: "size-10" %>
           <a class=" flex flex-row gap-1 items-center" href="/">
             <span class="text-xl text-bold font-extrabold">Anonymous Location</span>
           </a>
         </div>
         <a
           class="
-            block text-gray-800 font-semibold outline-none bg-white rounded-full px-12 py-3
+            hidden sm:flex text-center justify-center items-center text-gray-800 font-semibold outline-none bg-white rounded-full px-4 py-3
             text-sm focus:outline-none focus:ring sm:w-auto
           "
           href="<%= new_location_path %>"
@@ -52,7 +52,7 @@
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                class="text-gray-700 transition hover:opacity-75"
+                class="text-white transition hover:opacity-75"
               >
                 <span class="sr-only">Mastodon</span>
                 <%= inline_svg "mastodon.svg", class: "h-6 w-6" %>
@@ -64,7 +64,7 @@
                 href="https://twitter.com/hschnedlitz"
                 rel="noreferrer"
                 target="_blank"
-                class="text-gray-700 transition hover:opacity-75"
+                class="text-white transition hover:opacity-75"
               >
                 <span class="sr-only">Twitter</span>
 
@@ -81,7 +81,7 @@
                 href="https://github.com/hschne/data-dead-drop"
                 rel="noreferrer"
                 target="_blank"
-                class="text-gray-700 transition hover:opacity-75"
+                class="text-white transition hover:opacity-75"
               >
                 <span class="sr-only">GitHub</span>
 

@@ -1,17 +1,211 @@
 <section class="">
   <div class=" mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center ">
     <div class="mx-auto text-center">
-      <h1 class="font-bold text-8xl sm:text-6xl sm:leading-tight">
-        <p>Share Your Location.</p>
-        <p>Not Your Idendity.</p>
+      <h1 class="font-bold text-4xl sm:text-7xl sm:leading-tight">
+        <p
+          class="
+            bg-gradient-to-r from-cyan-400 via-purple-400 to-rose-400 inline-block
+            text-transparent bg-clip-text
+          "
+        >Share Your Location.</p>
+        <p class="text-3xl sm:text-6xl">Not Your Idendity.</p>
       </h1>
-
-      <%= image_tag "hero.png", class: "mx-auto max-w-2xl mt-4 sm:text-2xl/relaxed" %>
-
       <p class="mx-auto max-w-2xl mt-4 sm:text-2xl/relaxed">
         Use Anonymous Location to share your position with anyone, over any
         channel. In real-time.
       </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a
+          class="
+            block text-gray-900 font-semibold outline-none bg-white w-full rounded-full
+            transition px-12 py-3 text-sm focus:outline-none focus:ring sm:w-auto border
+          "
+          href="<%= new_location_path %>"
+        >
+          Get started
+        </a>
+
+        <a
+          class="
+            block w-full rounded-full border border-white px-12 py-3 text-sm
+            background-white font-medium focus:outline-none focus:ring sm:w-auto
+          "
+          href="#how-it-works"
+        >
+          How it works
+        </a>
+      </div>
+      <div class="max-w-4xl mx-auto w-full mt-16 relative">
+        <div
+          class="
+            absolute -inset-1 bg-gradient-to-r from-cyan-400 to-rose-400 blur opacity-75
+            animate-tilt
+          "
+        ></div>
+        <%= image_tag "hero.png",
+        class:
+          "relative w-full rounded inset-0 object-cover bg-gradient-to-r from-cyan-400 to-rose-400" %>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="how-it-works" class="">
+
+  <div class="container mx-auto max-w-screen-xl p-4 py-24 ">
+
+    <p class="text-lg text-teal-400 font-bold sm:text-2xl mb-4 uppercase">How It Works</p>
+    <h2 class="text-3xl font-semibold sm:text-5xl">Share Locations</h2>
+    <div
+      class="
+        py-16 grid grid-cols-1 gap-8 items-center justify-between md:grid-cols-4
+      "
+    >
+
+      <p class="text-8xl font-extrabold mb-4 text-teal-400">01</p>
+      <div class="col-span-3">
+        <h3 class="text-3xl font-semibold mb-2">Create location</h3>
+        <p class="mb-4">
+          Create a new location by dropping a pin on a map or sharing your
+          position. You'll be given a unique URL to share.
+        </p>
+      </div>
+
+      <p class="text-8xl font-extrabold mb-4 text-purple-400">02</p>
+      <div class="col-span-3">
+        <h3 class="text-3xl font-semibold mb-2">Share with anyone</h3>
+        <p class="mb-4">
+          Share this URL with anyone. It could be a friend, or it could be
+          someone you've never met before.
+        </p>
+      </div>
+
+      <p class="text-8xl font-extrabold mb-4 text-rose-400">03</p>
+      <div class="col-span-3">
+        <h3 class="text-3xl font-semibold mb-2">Track in real time.</h3>
+        <p class="mb-4">
+          Use an anonymous identity to protect your privacy. Everyone's
+          positions in a location are updated in real-time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="">
+  <div class=" container mx-auto max-w-screen-xl px-4 py-32 ">
+    <div class="flex flex-col justify-center items-center w-full text-center">
+      <p class="text-lg text-rose-400 font-bold sm:text-2xl mb-4 uppercase">Why Anonymous Location</p>
+      <h2 class="text-3xl font-semibold sm:text-5xl">Features</h2>
+    </div>
+
+    <div
+      class="
+        mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-2
+      "
+    >
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-lg bg-gray-800 text-white p-4">
+          <%= inline_svg "eye-off.svg" %>
+        </span>
+
+        <div>
+          <h2 class="text-lg font-bold">
+            Completely Anonymous.
+          </h2>
+
+          <p class="mt-1 text-sm">
+            No login or account is required. We don't know your name or email,
+            and we don't want to. The only thing we'll ever share is your
+            location.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-lg bg-gray-800 text-white p-4">
+          <%= inline_svg "globe.svg" %>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold">
+            Works Everywhere.
+          </h2>
+
+          <p class="mt-1 text-sm">
+            You don't need an app for that. Anonymous location works on any
+            device with a web browser.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-lg bg-gray-800 text-white p-4">
+
+          <%= inline_svg "dollar-sign.svg" %>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold">
+            Free.
+          </h2>
+
+          <p class="mt-1 text-sm">
+            Anonymous Location is entirely free to use. No subscriptions, no
+            hidden fees.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-lg bg-gray-800 text-white p-4">
+          <%= inline_svg "github.svg" %>
+        </span>
+        <div>
+          <h2 class="text-lg font-bold">
+            Open Source.
+          </h2>
+
+          <p class="mt-1 text-sm">
+            Don't believe our claims? That's fine. You can read the source code
+            for this product on GitHub. Data Dead Drop is built with love using
+            Ruby on Rails.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="mx-auto max-w-screen-xl px-4 py-32">
+    <div
+      class="
+        grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 justify-items-center
+        content-center
+      "
+    >
+
+      <%= image_tag "chat.png",
+      class: "rounded inset-0 object-cover h-64 sm:h-80 lg:order-last lg:h-full 0" %>
+
+      <div class="lg:py-24">
+        <p class="text-lg text-emerald-400 font-bold sm:text-2xl mb-4 uppercase">Simplify your conversations</p>
+        <h2 class="text-3xl font-semibold sm:text-5xl">Just Meet</h2>
+
+        <p class="mt-4 text-white">
+          You agreed to meet and decided on a place. But it's not so simple, is
+          it? Communication is hard. Avoid exhausting conversations. Simplify
+          dates and meet-ups. Just send a link and be done with it.
+        </p>
+
+        <%= link_to "Get Started",
+        new_location_path,
+        class:
+          "mt-8 inline-block rounded-full text-gray-900 bg-white px-12 py-3 text-sm font-medium
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   transition focus:outline-none focus:ring
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   focus:ring-fuchsia-400" %>
+      </div>
     </div>
   </div>
 </section>
