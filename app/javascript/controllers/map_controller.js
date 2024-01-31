@@ -54,10 +54,7 @@ export default class extends Controller {
   _disconnected() {}
 
   _received(data) {
-    console.log("Received...");
-    console.log(data);
     const { uuid, coordinates } = data;
-    console.log(data.event);
     if (data.event === "clientDisconnected") {
       if (!this.markers[uuid]) return;
 

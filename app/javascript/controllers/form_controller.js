@@ -30,7 +30,6 @@ export default class extends Controller {
       (position) => {
         navigator.geolocation.watchPosition(
           (pos) => {
-            console.log(pos.coords.longitude, pos.coords.latitude);
             this.mapOutlet.sendCoordinates(
               `${pos.coords.longitude},${pos.coords.latitude}`,
             );
