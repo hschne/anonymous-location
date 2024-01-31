@@ -6,7 +6,7 @@
 
 ### Share your location, not your identity.
 
-[![Main](https://github.com/hschne/anonymous-location/actions/workflows/main.yml/badge.svg)](https://github.com/hschne/anonymous-location/actions/workflows/main.yml)
+[![CI](https://github.com/hschne/anonymous-location/actions/workflows/ci.yml/badge.svg)](https://github.com/hschne/anonymous-location/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/hschne/anonymous-location)](https://img.shields.io/github/license/hschne/anonymous-location)
 
 </div>
@@ -14,10 +14,10 @@
 ## Usage
 
 <div align="center">
-<img alt="hero" src="app/assets/images/hero.png" width="512px" height="auto">
+<img alt="hero" src="app/assets/images/location.png" width="512px" height="auto">
 </div>
 
-Visit https://anonymouslocation.com to share your location. Create a new location by clicking on the map. 
+Visit https://anonymouslocation.com to share your location. Create a new location by clicking on the map. Every location has an expiry, after which it will be automatically deleted.
 
 You'll be given a unique link which you can share. Any connected client has the option to "join" the location by sharing their coordinates. Movements of individual clients will shared live on the map. 
 
